@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>react-todo</title>
 
+    <link rel="stylesheet" href="./resources/css/reset.css">
+    <link rel="stylesheet" href="./resources/css/main.css">
+
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 
@@ -22,10 +25,10 @@
 
       render() {
         return (
-          <div>
-            <button>+</button>
-            <p>已完成的项目数：0</p>
-            <p>未完成的项目数：3</p>
+          <div className="add">
+            <button className="btn-add">+</button>
+            <p className="status">已完成的项目数：0</p>
+            <p className="status">未完成的项目数：3</p>
           </div>
         );
       }
@@ -36,14 +39,14 @@
 
       render() {
         return (
-          <div>
-            <p>Todo A</p>
-            <p>project A</p>
-            <button>del</button>
-            <button>update</button>
-            <div>
-              <button>点击完成</button>
+          <div className="addpro">
+            <p className="title">Todo A</p>
+            <p className="content">project A</p>
+            <div className="btn-group">
+              <button className="del">del</button>
+              <button className="revise">revise</button>
             </div>
+            <div className="finish">点击完成</div>
           </div>
         );
       }
@@ -55,7 +58,6 @@
         return (
           <div>
             <AddProject />
-            <hr />
             <ShowProject />
             <ShowProject />
             <ShowProject />
