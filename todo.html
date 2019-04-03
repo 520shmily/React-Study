@@ -22,11 +22,26 @@
   <script type="text/babel">
   
     class AddProject extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state =　{
+          value: <button className="btn-add">+</button>,
+        };
+
+        this.handleAddClick = this.handleAddClick.bind(this);
+      }
+
+      handleAddClick() {
+        this.setState ({
+          value: <CreatePro />,
+        });
+      }
 
       render() {
+
         return (
           <div className="add">
-            <button className="btn-add">+</button>
+            <div  onClick={() => this.handleAddClick()}>{this.state.value}</div>
             <p className="status">已完成的项目数：0</p>
             <p className="status">未完成的项目数：3</p>
           </div>
@@ -47,6 +62,24 @@
               <button className="revise"></button>
             </div>
             <div className="finish">点击完成</div>
+          </div>
+        );
+      }
+    }
+
+    class CreatePro extends React.Component {
+       
+      render() {
+        return (
+          <div className="msg">
+            <p className="create-title">Title</p>
+            <input type="text" value=" " />
+            <p className="create-pro">Project</p>
+            <input type="text" value=" " />
+            <div className="tool">
+              <button className="btn-up btn-tool">创建</button>
+              <button className="btn-off btn-tool">关闭</button>
+            </div>
           </div>
         );
       }
