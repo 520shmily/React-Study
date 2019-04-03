@@ -20,38 +20,8 @@
 </body>
 
   <script type="text/babel">
-  
-    class AddProject extends React.Component {
-      constructor(props) {
-        super(props);
-        this.state =　{
-          value: <button className="btn-add">+</button>,
-        };
-
-        this.handleAddClick = this.handleAddClick.bind(this);
-      }
-
-      handleAddClick() {
-        this.setState ({
-          value: <CreatePro />,
-        });
-      }
-
-      render() {
-
-        return (
-          <div className="add">
-            <div  onClick={() => this.handleAddClick()}>{this.state.value}</div>
-            <p className="status">已完成的项目数：0</p>
-            <p className="status">未完成的项目数：3</p>
-          </div>
-        );
-      }
-    }
-
 
     class ShowProject extends React.Component {
-
       render() {
         return (
           <div className="addpro">
@@ -67,6 +37,51 @@
       }
     }
 
+    
+    class AddProject extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state =　{
+          value: <Button onClick={() => this.handleAddClick()}/>,
+          finishNumber: 0,
+          unfinishNumber: 3,
+        };
+
+        this.handleAddClick = this.handleAddClick.bind(this);
+       this.handleToolClick = this.handleToolClick.bind(this);
+      }
+
+      handleToolClick() {
+        this.setState ({
+          value: <Button onClick={() => this.handleAddClick()} />,
+        });
+      }
+
+      handleAddClick() {
+        this.setState ({
+          value:  <CreatePro onClick={() => this.handleToolClick()}/>,
+        });
+      }
+
+      render() {
+      
+        return (
+          <div className="add">
+            <div>{this.state.value}</div>
+            <p className="status">已完成的项目数：{this.state.finishNumber}</p>
+            <p className="status">未完成的项目数：{this.state.unfinishNumber}</p>
+          </div>
+        );
+      }
+    }
+
+    function Button(props) {
+      return (
+        <button className="btn-add" onClick={props.onClick}>+</button>
+      );
+    }
+
+
     class CreatePro extends React.Component {
        
       render() {
@@ -76,7 +91,7 @@
             <input type="text" value=" " />
             <p className="create-pro">Project</p>
             <input type="text" value=" " />
-            <div className="tool">
+            <div className="tool" onClick={() => this.props.onClick()}>
               <button className="btn-up btn-tool">创建</button>
               <button className="btn-off btn-tool">关闭</button>
             </div>
@@ -86,6 +101,7 @@
     }
 
     class App extends React.Component {
+      
 
       render() {
         return (
