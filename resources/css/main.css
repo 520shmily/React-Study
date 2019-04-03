@@ -10,7 +10,7 @@ body {
   font-size: 14px;
 }
 
-.btn-add {
+.btn-add{
   width: 40px;
   height: 35px;
   font-size: 26px;
@@ -55,8 +55,25 @@ body {
 }
 
 .btn-group {
-  padding: 10px 30px;
+  padding: 10px 20px;
   text-align: right;
+}
+
+.del, .revise {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+  border: none;
+  outline: none;
+  background: url(../images/del.png) no-repeat;
+}
+
+.revise {
+  width: 14px;
+  height: 14px;
+  background: url(../images/revise.png) no-repeat;
+  background-size: cover;
+  cursor: pointer;
 }
 
 .finish {
