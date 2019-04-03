@@ -136,3 +136,8 @@ body {
   border: 1px solid #DB2828;
   color: #DB2828;
 }
+
+/* 实现交互时的css样式 */
+.no-show {
+  display: none;
+}
