@@ -55,8 +55,6 @@
         this.state =　{
           btnValue: ' ',
           proValue: 'no-show',
-          finishNumber: 0,
-          unfinishNumber: 3,
         };
 
         this.handleAddClick = this.handleAddClick.bind(this);
@@ -87,8 +85,8 @@
             <div className={this.state.proValue}>
               <CreatePro onClick={() => this.handleToolClick()}/>
             </div>
-            <p className="status">已完成的项目数：{this.state.finishNumber}</p>
-            <p className="status">未完成的项目数：{this.state.unfinishNumber}</p>
+            <p className="status">已完成的项目数：{this.props.finishNumber}</p>
+            <p className="status">未完成的项目数：{this.props.unfinishNumber}</p>
           </div>
         );
       }
@@ -100,6 +98,8 @@
       constructor(props) {
         super(props);
         this.state ={
+          finishNumber: 0,
+          unfinishNumber: 3,
           btnValue: 'finish',
           proValue: 'finish no-show',
         };
@@ -108,9 +108,13 @@
       }
 
       handleFinishClick() {
+        finishNumber = this.state.finishNumber + 1;
+        unfinishNumber = this.state.unfinishNumber - 1;
         this.setState ({
           btnValue: 'finish no-show',
           proValue: 'finish ',
+          finishNumber: finishNumber,
+          unfinishNumber: unfinishNumber
         });
       }
 
