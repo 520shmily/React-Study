@@ -31,6 +31,16 @@
 
     // 封装创建project组件
     class CreatePro extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          proContent: [
+            {title: 'Todo A', pro: 'Project A'},
+            {title: 'Todo B', pro: 'Project B'},
+            {title: 'Todo C', pro: 'Project C'},
+          ]
+        };
+      }
        
       render() {
         return (
@@ -97,31 +107,25 @@
 
       constructor(props) {
         super(props);
-        this.state ={
-          finishNumber: 0,
-          unfinishNumber: 3,
+        this.state = {
           btnValue: 'finish',
           proValue: 'finish no-show',
         };
 
-        this.handleFinishClick = this.handleFinishClick.bind(this);
+        this.handleClassChange = this.handleClassChange.bind(this);
       }
 
-      handleFinishClick() {
-        finishNumber = this.state.finishNumber + 1;
-        unfinishNumber = this.state.unfinishNumber - 1;
+      handleClassChange() {
         this.setState ({
           btnValue: 'finish no-show',
           proValue: 'finish ',
-          finishNumber: finishNumber,
-          unfinishNumber: unfinishNumber
         });
       }
 
       render() {
         return (
-          <div>
-            <div className={this.state.btnValue} onClick={() => this.handleFinishClick()}>点击完成</div>
+          <div onClick={() => this.handleClassChange()}>
+            <div className={this.state.btnValue} onClick={() => this.props.onClick()} >点击完成</div>
             <div className={this.state.proValue} id="change">已完成</div>
           </div>
         );
@@ -138,7 +142,7 @@
         };
 
          this.handleDelClick = this.handleDelClick.bind(this);
-        // this.handleReviseClick = this.handleReviseClick.bind(this);
+         this.handleReviseClick = this.handleReviseClick.bind(this);
         
       }
 
@@ -157,13 +161,13 @@
       render() {
         let Element = (
           <div className="addpro">
-            <p className="title">Todo {this.props.todo}</p>
-            <p className="content">project {this.props.todo}</p>
+            <p className="title">{this.props.title}</p>
+            <p className="content">{this.props.pro}</p>
             <div className="btn-group">
               <button className="del" onClick={() => this.handleDelClick()}></button>
               <button className="revise" onClick={() => this.handleReviseClick()}></button>
             </div>
-            <IsFinishpro />
+            <IsFinishpro onClick={() => this.props.onClick()}/>
           </div>
         );
         if(this.state.isDel) {
@@ -202,19 +206,35 @@
       constructor(props) {
         super(props);
         this.state = {
-
+          finishNumber: 0,
+          unfinishNumber: 3,
         };
+        
+        this.handleFinishClick = this.handleFinishClick.bind(this);
+      }
 
+      handleFinishClick() {
+        let finish = this.state.finishNumber + 1;
+        let unfinish = this.state.unfinishNumber - 1;
+        this.setState ({
+          finishNumber: finish,
+          unfinishNumber: unfinish,
+        });
       }
       
 
       render() {
+        // let item = [];
+        // for (let i = 0; i < this.props.unfinishNumber; i ++) {
+        //   item.push(<ShowProject title={this.props.proContent[i].title} pro={this.props.proContent[i].pro}/>)
+        // }
+
         return (
           <div>
-            <AddProject />
-            <ShowProject todo="A"/>
-            <ShowProject todo="B"/>
-            <ShowProject todo="C"/>
+            <AddProject finishNumber={this.state.finishNumber} unfinishNumber={this.state.unfinishNumber}/>
+            <ShowProject title="Todo A" pro="Project A" onClick={() => this.handleFinishClick()}/>
+            <ShowProject title="Todo B" pro="Project B" onClick={() => this.handleFinishClick()}/>
+            <ShowProject title="Todo C" pro="Project C" onClick={() => this.handleFinishClick()}/>
           </div>
         );
       }
