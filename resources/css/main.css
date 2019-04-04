@@ -96,9 +96,14 @@ body {
   color: #000;
 }
 
+.my-msg {
+  padding-bottom: 0;
+}
+
 .msg input {
   width: 260px;
   height: 30px;
+  padding-left: 10px;
   outline: none;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -132,12 +137,29 @@ body {
   color: #2185D0;
 }
 
-.btn-off {
+.btn-off{
   border: 1px solid #DB2828;
   color: #DB2828;
+}
+
+.my-tool {
+  width: 270px;
+}
+
+.btn-close {
+  width: 270px;
+  margin-bottom: 10px;
+  border: 1px solid #2185D0;
+  color: #2185D0;
 }
 
 /* 实现交互时的css样式 */
 .no-show {
   display: none;
 }
+
+#change {
+  border-color: #21BA45;
+  color: #21BA45;
+}
+

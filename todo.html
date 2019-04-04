@@ -21,23 +21,34 @@
 
   <script type="text/babel">
 
-    class ShowProject extends React.Component {
+    
+    // 封装点击添加project按钮组件内容
+    function Button(props) {
+      return (
+        <button className="btn-add" onClick={props.onClick}>+</button>
+      );
+    }
+
+    // 封装创建project组件
+    class CreatePro extends React.Component {
+       
       render() {
         return (
-          <div className="addpro">
-            <p className="title">Todo A</p>
-            <p className="content">project A</p>
-            <div className="btn-group">
-              <button className="del"></button>
-              <button className="revise"></button>
+          <div className="msg">
+            <p className="create-title">title</p>
+            <input type="text" value=" " />
+            <p className="create-pro">Project</p>
+            <input type="text" value=" " />
+            <div className="tool" onClick={() => this.props.onClick()}>
+              <button className="btn-up btn-tool">创建</button>
+              <button className="btn-off btn-tool">关闭</button>
             </div>
-            <div className="finish">点击完成</div>
           </div>
         );
       }
     }
 
-    
+    // 封装Button组件和创建project组件内容的组件
     class AddProject extends React.Component {
       constructor(props) {
         super(props);
@@ -83,41 +94,123 @@
       }
     }
 
-    function Button(props) {
-      return (
-        <button className="btn-add" onClick={props.onClick}>+</button>
-      );
-    }
+    //封装是否完成project按钮切换的组件内容
+    class IsFinishpro extends React.Component {
 
+      constructor(props) {
+        super(props);
+        this.state ={
+          btnValue: 'finish',
+          proValue: 'finish no-show',
+        };
 
-    class CreatePro extends React.Component {
-       
+        this.handleFinishClick = this.handleFinishClick.bind(this);
+      }
+
+      handleFinishClick() {
+        this.setState ({
+          btnValue: 'finish no-show',
+          proValue: 'finish ',
+        });
+      }
+
       render() {
         return (
-          <div className="msg">
-            <p className="create-title">Title</p>
-            <input type="text" value=" " />
-            <p className="create-pro">Project</p>
-            <input type="text" value=" " />
-            <div className="tool" onClick={() => this.props.onClick()}>
-              <button className="btn-up btn-tool">创建</button>
-              <button className="btn-off btn-tool">关闭</button>
-            </div>
+          <div>
+            <div className={this.state.btnValue} onClick={() => this.handleFinishClick()}>点击完成</div>
+            <div className={this.state.proValue} id="change">已完成</div>
           </div>
         );
       }
     }
 
+    // 封装project组件内容
+    class ShowProject extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          isDel: false,
+          isRevise: false,
+        };
+
+         this.handleDelClick = this.handleDelClick.bind(this);
+        // this.handleReviseClick = this.handleReviseClick.bind(this);
+        
+      }
+
+      handleDelClick() {
+        this.setState ({
+          isDel: true,
+        });
+      }
+
+      handleReviseClick() {
+        this.setState ({
+          isRevise: true,
+        });
+      }
+
+      render() {
+        let Element = (
+          <div className="addpro">
+            <p className="title">Todo {this.props.todo}</p>
+            <p className="content">project {this.props.todo}</p>
+            <div className="btn-group">
+              <button className="del" onClick={() => this.handleDelClick()}></button>
+              <button className="revise" onClick={() => this.handleReviseClick()}></button>
+            </div>
+            <IsFinishpro />
+          </div>
+        );
+        if(this.state.isDel) {
+          Element = <div></div>;
+        } else if(this.state.isRevise) {
+          Element = <RevisePro />;
+        }
+
+        return Element;
+      }
+    }
+
+    // 封装修改project组件内容
+    class RevisePro extends React.Component {
+      constructor(props) {
+        super(props);
+      }
+       
+       render() {
+         return (
+           <div className="msg my-msg">
+             <p className="create-title">title</p>
+             <input type="text" value="Todo A" />
+             <p className="create-pro">Project</p>
+             <input type="text" value="project A" />
+             <div className="tool my-tool" >
+               <button className="btn-close btn-tool">Close X</button>
+             </div>
+             <IsFinishpro />
+           </div>
+         );
+       }
+     }
+
     class App extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+
+        };
+
+      }
       
 
       render() {
         return (
           <div>
             <AddProject />
-            <ShowProject />
-            <ShowProject />
-            <ShowProject />
+            <ShowProject todo="A"/>
+            <ShowProject todo="B"/>
+            <ShowProject todo="C"/>
           </div>
         );
       }
